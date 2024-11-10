@@ -1,0 +1,10 @@
+
+  <% if session[:user_id] %>
+
+    <p> Logged in <strong><%= User.find(session[:user_id]).username %></strong></p>
+    <%= link_to 'Logout', logout_path, method: :delete, form: { class: 'logout-form' } %>
+
+  <% else %>
+    <%= link_to "signup", signup_path %>
+    <%= link_to 'login', login_path %>
+  <% end %>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task Manager</title>
+    <style>
+      /* General Page Styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+      
+      /* Header Styling */
+      .header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: space-between; /* Align content to the left and right */
+        align-items: center; /* Vertically center content */
+
+      }
+
+      .header-nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .header-nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 18px;
+      }
+
+      .header-nav a:hover {
+        text-decoration: underline;
+      }
+
+      /* Table Styling */
+      .task-table {
+        width: 60%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .task-table th, .task-table td {
+        border: 1px solid #ccc;
+        padding: 15px;
+        text-align: left;
+        background-color: #fff;
+      }
+
+      .task-table th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .task-table td a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .task-table td a:hover {
+        text-decoration: underline;
+      }
+
+      /* Button Styling */
+      .new-task-btn {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+      .new-task-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+
+      <header class="header">
+       <h1>Expense Tracker</h1>
+        <div class="header-nav">
+         <%= render partial: "partial/header" %>
+        </div>
+      </header>
+
+    <h1 style="text-align: center;">Expense in Index Page</h1>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+       <% if session[:user_id] %>
+        <% @expenses.each do |expense| %>
+          <tr>
+            <td>
+            <ul>
+              <%= link_to expense.title, expense %>
+            </ul>
+            </td>
+          </tr>
+        <% end %>
+       <%end%>
+      </tbody>
+    </table>
+
+  <% if session[:user_id] %>
+   <%= link_to "New Expense", new_expense_path, class: 'new-task-btn' %>
+  <% end %> 
+  </body>
+</html>
